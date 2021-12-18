@@ -1,21 +1,58 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from "react";
+import AppLoading from "expo-app-loading";
+import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
+import * as eva from "@eva-design/eva";
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
+import { EvaIconsPack } from "@ui-kitten/eva-icons";
+import Navigator from "./navigations/routes";
+import { setCustomText } from "react-native-global-props";
+
+const customFonts = {
+  "fira-regular": require("./fonts/FiraSans-Regular.ttf"),
+  "fira-bold": require("./fonts/FiraSans-Bold.ttf"),
+  "openSans-light": require("./fonts/OpenSans-Light.ttf"),
+  "Roboto-medium": require("./fonts/Roboto-Medium.ttf"),
+  "Roboto-bold": require("./fonts/Roboto-Bold.ttf"),
+  ...Ionicons.font,
+};
+
+const customTextProps = {
+  style: {
+    fontFamily: "openSans-light",
+    color: "#fff",
+  },
+};
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [fontsLoaded, setFontsLoaded] = useState(false);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  const _loadFontsAsync = async () => {
+    await Font.loadAsync(customFonts);
+    setFontsLoaded(true);
+  };
+
+  useEffect(() => {
+    _loadFontsAsync();
+  });
+
+  if (fontsLoaded) {
+    setCustomText(customTextProps);
+    return (
+      <>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider {...eva} theme={eva.light}>
+          <Navigator />
+        </ApplicationProvider>
+      </>
+    );
+  } else {
+    return (
+      <AppLoading
+        startAsync={_loadFontsAsync}
+        onFinish={() => setFontsLoaded(true)}
+        onError={console.warn}
+      />
+    );
+  }
+}
