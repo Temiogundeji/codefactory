@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Provider } from "react-redux";
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
