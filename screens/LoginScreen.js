@@ -1,21 +1,26 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CommonActions } from "@react-navigation/native";
 import {
   View,
   StyleSheet,
   Image,
   TouchableWithoutFeedback,
   TouchableOpacity,
-  KeyboardAvoidingView,
+  ActivityIndicator,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useForm, Controller } from "react-hook-form";
 import { Text, Input, Icon, Button } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
 import { navigate } from "../shared/utils";
+import { login } from "../actions/users";
 
 const LoginScreen = () => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isLoading = useSelector((state) => state.login.isLoading);
   const {
     control,
     handleSubmit,
@@ -26,7 +31,20 @@ const LoginScreen = () => {
       password: "",
     },
   });
-  const onSubmit = (data) => console.log(data);
+
+  const navigateToHome = () => {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [{ name: "DashboardScreen" }],
+      })
+    );
+  };
+
+  const onSubmit = (data) => {
+    setIsSubmitting(isLoading);
+    dispatch(login(data, navigateToHome));
+  };
   const navigation = useNavigation();
 
   const toggleSecureEntry = () => {
@@ -51,12 +69,18 @@ const LoginScreen = () => {
           }}
           source={require("../assets/login.png")}
         />
+
         <View style={Styles.introOneTextContainer}>
           <View>
             <Text style={Styles.introOneText}>Login</Text>
           </View>
           <View style={Styles.paraTextContainer}>
             <Text style={Styles.introParaText}>Welcome back on track</Text>
+          </View>
+          <View style={Styles.loaderSection}>
+            {isSubmitting ? (
+              <ActivityIndicator size={30} color="#00cc00" />
+            ) : null}
           </View>
         </View>
         <KeyboardAwareScrollView style={Styles.loginForm}>
@@ -140,6 +164,9 @@ const Styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-end",
+  },
+  loaderSection: {
+    paddingVertical: 10,
   },
   skipText: {
     color: "#78746D",

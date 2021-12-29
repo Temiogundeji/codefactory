@@ -31,27 +31,3 @@ export const loginReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export const signupReducer = (state = initialState, action) => {
-  const { type } = action;
-  switch (type) {
-    case users.REGISTER_REQUEST:
-      return {
-        isLoading: true,
-      };
-    case users.REGISTER_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        isRegistered: true,
-      };
-    case users.REGISTER_FAILURE:
-      return {
-        ...state,
-        isRegistered: false,
-        isLoading: false,
-      };
-    default:
-      return state;
-  }
-};

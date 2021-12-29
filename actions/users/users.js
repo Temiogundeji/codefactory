@@ -1,6 +1,14 @@
 import { userEndpoints } from "../../shared/api";
-import { setRequest, setError, setSuccess } from "./creators";
+import {
+  setRequest,
+  setError,
+  setSuccess,
+  setRegisterError,
+  setRegisterSuccess,
+  setRegisterRequest,
+} from "./creators";
 import { storeUserData } from "../../shared/utils";
+import { Alert } from "react-native";
 
 export const login = (loginInput, callback = () => {}) => {
   const { email, password } = loginInput;
@@ -40,7 +48,7 @@ export const login = (loginInput, callback = () => {}) => {
 
 export const signup = (signupInput, callback = () => {}) => {
   return (dispatch) => {
-    dispatch(setRequest());
+    dispatch(setRegisterRequest());
     return fetch(userEndpoints.signup, {
       method: "POST",
       headers: {
@@ -56,14 +64,14 @@ export const signup = (signupInput, callback = () => {}) => {
         if (status === "success") {
           let user = { data, token };
           storeUserData("user", user);
-          dispatch(setLoginSuccess(data));
+          dispatch(setRegisterSuccess(data));
           Alert.alert("Registeration successful", message);
           callback();
         }
       })
       .catch((err) => {
         Alert.alert("Error", "Some error occured, please retry");
-        dispatch(setLoginError(err));
+        dispatch(setRegisterError(err));
         console.log(err);
       });
   };

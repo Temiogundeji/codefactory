@@ -8,6 +8,7 @@ import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import Navigator from "./navigations/routes";
 import { setCustomText } from "react-native-global-props";
+import { store } from "./store";
 
 const customFonts = {
   "fira-regular": require("./fonts/FiraSans-Regular.ttf"),
@@ -15,6 +16,7 @@ const customFonts = {
   "openSans-light": require("./fonts/OpenSans-Light.ttf"),
   "Roboto-medium": require("./fonts/Roboto-Medium.ttf"),
   "Roboto-bold": require("./fonts/Roboto-Bold.ttf"),
+  "Roboto-light": require("./fonts/Roboto-Light.ttf"),
   ...Ionicons.font,
 };
 
@@ -40,12 +42,12 @@ export default function App() {
   if (fontsLoaded) {
     setCustomText(customTextProps);
     return (
-      <>
+      <Provider store={store}>
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider {...eva} theme={eva.light}>
           <Navigator />
         </ApplicationProvider>
-      </>
+      </Provider>
     );
   } else {
     return (

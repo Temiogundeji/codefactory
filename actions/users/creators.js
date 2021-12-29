@@ -19,3 +19,23 @@ export const setSuccess = (payload) => {
     payload,
   };
 };
+
+export const setRegisterRequest = () => {
+  return {
+    type: users.REGISTER_REQUEST,
+  };
+};
+
+export const setRegisterError = (payload) => {
+  return {
+    type: users.REGISTER_ERROR,
+    error: payload,
+  };
+};
+
+export const setRegisterSuccess = (payload) => {
+  return {
+    type: users.REGISTER_REQUEST,
+    payload,
+  };
+};

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   View,
   StyleSheet,
@@ -12,11 +13,23 @@ import { useForm, Controller } from "react-hook-form";
 import { Text, Input, Icon, Button } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
 import { navigate } from "../shared/utils";
+import { signup } from "../actions/users";
 
 const SignupScreen = () => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const isLoading = useSelector((state) => state.login.isLoading);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const navigateToHome = () => {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [{ name: "DashboardScreen" }],
+      })
+    );
+  };
 
   const {
     control,
@@ -30,9 +43,8 @@ const SignupScreen = () => {
     },
   });
   const onSubmit = (data) => {
-    setIsLoading(true);
-    console.log(data);
-    setIsLoading(false);
+    setIsSubmitting(isLoading);
+    dispatch(signup(data, navigateToHome));
   };
 
   const toggleSecureEntry = () => {
@@ -82,12 +94,7 @@ const SignupScreen = () => {
               )}
               name="username"
             />
-            {errors.username && (
-              <Text>
-                Username isLoading ? <ActivityIndicator size={20} /> : null
-                required.
-              </Text>
-            )}
+            {errors.username && <Text>Username required.</Text>}
           </View>
           <View>
             <Controller
@@ -150,7 +157,7 @@ const SignupScreen = () => {
               onPress={handleSubmit(onSubmit)}
             >
               <Text style={Styles.forgetText}>Sign Up</Text>
-              {isLoading ? (
+              {isSubmitting ? (
                 <ActivityIndicator color={"#cccccc"} size={20} />
               ) : null}
             </TouchableOpacity>
