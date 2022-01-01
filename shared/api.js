@@ -9,4 +9,8 @@ export const userEndpoints = {
   signup: `${root}/api/${version}/user/auth/signup`,
 };
 
+export const courseEndpoints = {
+  courses: `${root}/api/${version}/courses`,
+};
+
 const coursesEndpoints = {};

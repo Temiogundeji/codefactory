@@ -6,7 +6,8 @@ const initialState =
     : { isLoading: false, isLoggedIn: false, token: "", data: "" };
 
 export const loginReducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { type } = action;
+  switch (type) {
     case users.LOGIN_REQUEST:
       return {
         ...state,

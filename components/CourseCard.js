@@ -1,20 +1,17 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View, Image } from "react-native";
-import { Card } from "@ui-kitten/components";
+import { StyleSheet, Text, View, Image } from "react-native";
 
-const image = { uri: "https://reactjs.org/logo-og.png" };
+// const image = { uri: "https://reactjs.org/logo-og.png" };
 
 const CourseCard = ({ cardImage, title, description }) => (
   <View style={Styles.container}>
     <View style={Styles.cardContainer}>
       <View style={Styles.cardHeader}>
-        <Image source={image} style={Styles.image} />
+        <Image source={cardImage} style={Styles.image} />
       </View>
       <View style={Styles.cardBody}>
-        <Text style={Styles.cardTitle}>UI</Text>
-        <Text style={Styles.cardDescription}>
-          Advanced User Interface Design
-        </Text>
+        <Text style={Styles.cardTitle}>{title}</Text>
+        <Text style={Styles.cardDescription}>{description}</Text>
       </View>
     </View>
   </View>
