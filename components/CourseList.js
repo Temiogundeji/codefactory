@@ -1,47 +1,68 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView, Text, Dimensions } from "react-native";
 import { getCourses } from "../actions/courses";
 import CourseCard from "../components/CourseCard";
+import { ActivityIndicator } from "react-native-paper";
+
+const windowHeight = Dimensions.get("window").height;
+const windowWidth = Dimensions.get("window").width;
 
 const CourseList = () => {
   const [myCourses, setMyCourses] = useState([]);
-  const courses = useSelector((state) => state.courses);
+  const courses = useSelector((state) => state.courses.courses);
+  const isLoading = useSelector((state) => state.courses.isLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (courses) {
-      //   console.log(courses);
-      dispatch(getCourses());
-    }
+    dispatch(getCourses());
   }, []);
 
   useEffect(() => {
-    if (myCourses && myCourses.length > 0) {
-      setMyCourses(myAttendances);
+    if (courses && courses.length > 0) {
+      setMyCourses(courses);
     }
   }, [myCourses]);
 
-  return (
-    <View style={Styles.container}>
-      <ScrollView>
+  const CardList = () => {
+    return (
+      <View style={Styles.listContainer}>
         {myCourses.map((course) => {
-          <CourseCard
-            title={course.title}
-            cardImage={course.image}
-            description={course.about}
-          />;
+          return (
+            <CourseCard
+              key={course.id}
+              cardImage={course.image}
+              title={course.title}
+              description={course.about}
+            />
+          );
         })}
-      </ScrollView>
-    </View>
+      </View>
+    );
+  };
+
+  return (
+    <ScrollView>
+      <View style={Styles.container}>
+        {isLoading ? <ActivityIndicator size={34} color="#78746D" /> : null}
+        <CardList />
+      </View>
+    </ScrollView>
   );
 };
 
 const Styles = StyleSheet.create({
   container: {
-    flex: 1,
+    display: "flex",
+    flexDirection: "column",
     alignItems: "center",
-    width: "100%",
+    width: windowWidth,
+  },
+  listContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

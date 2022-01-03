@@ -1,5 +1,8 @@
 import { courses } from "../../constants/courses";
-const initialState = [];
+const initialState = {
+  isLoading: false,
+  courses: [],
+};
 export const courseReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -9,12 +12,11 @@ export const courseReducer = (state = initialState, action) => {
         isLoading: true,
       };
     case courses.COURSE_LOADING_SUCCESS:
-      //   return {
-      //     ...state,
-      //     payload,
-      //     isLoading: false,
-      //   };
-      return [...state, payload];
+      return {
+        ...state,
+        isLoading: false,
+        courses: [...payload],
+      };
     case courses.COURSE_LOADING_ERROR:
       return {
         ...state,

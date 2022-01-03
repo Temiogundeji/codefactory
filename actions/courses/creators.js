@@ -9,7 +9,7 @@ export const courseRequest = () => {
 export const courseSuccess = (payload) => {
   return {
     type: courses.COURSE_LOADING_SUCCESS,
-    payload,
+    payload: payload,
   };
 };
 
@@ -18,4 +18,4 @@ export const courseError = (error) => {
     type: courses.COURSE_LOADING_ERROR,
     payload: error,
   };
-};
+};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            

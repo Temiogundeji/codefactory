@@ -1,13 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 
-// const image = { uri: "https://reactjs.org/logo-og.png" };
+const windowWidth = Dimensions.get("window").width - 40;
 
 const CourseCard = ({ cardImage, title, description }) => (
   <View style={Styles.container}>
     <View style={Styles.cardContainer}>
       <View style={Styles.cardHeader}>
-        <Image source={cardImage} style={Styles.image} />
+        <Image source={{ uri: cardImage }} style={Styles.image} />
       </View>
       <View style={Styles.cardBody}>
         <Text style={Styles.cardTitle}>{title}</Text>
@@ -27,9 +27,10 @@ const Styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     borderRadius: 8,
     overflow: "hidden",
-    height: 250,
-    width: "90%",
+    height: 300,
+    width: windowWidth,
     marginHorizontal: "5%",
+    marginBottom: 20,
     shadowColor: "#ccc",
     shadowOffset: {
       width: 0,
@@ -59,8 +60,11 @@ const Styles = StyleSheet.create({
     alignContent: "center",
     fontFamily: "Roboto-medium",
   },
+  cardHeader: {
+    height: 150,
+  },
   image: {
-    height: 135,
+    height: 155,
     width: "100%",
   },
   text: {
@@ -69,7 +73,7 @@ const Styles = StyleSheet.create({
     lineHeight: 84,
     fontWeight: "bold",
     textAlign: "center",
-    backgroundColor: "#000000c0",
+    backgroundColor: "#000000",
   },
 });
 

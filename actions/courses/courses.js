@@ -4,21 +4,17 @@ import { courseRequest, courseError, courseSuccess } from ".";
 export const getCourses = () => {
   return (dispatch) => {
     dispatch(courseRequest());
-    fetch(courseEndpoints.courses)
+    return fetch(courseEndpoints.courses)
       .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        const { status, courses } = json;
+      .then((data) => {
+        const { status, courses } = data;
         if (status === "success") {
-          console.log(courses);
           dispatch(courseSuccess(courses));
         }
       })
-      .catch((e) => {
+      .catch((err) => {
         alert("Error", "Some error occured, please retry");
-        dispatch(courseError(e.message));
-        alert(e.message);
-        console.log(e.message);
+        dispatch(courseError(err.message));
       });
   };
 };
