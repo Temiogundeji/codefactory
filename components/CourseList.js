@@ -63,7 +63,10 @@ const Styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: 240,
+    marginTop: 10,
   },
 });
+
 
 export default CourseList;
