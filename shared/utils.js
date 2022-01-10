@@ -25,3 +25,12 @@ export const EMAIL_VALIDATION_REGEXP =
 export const navigate = (navigation, screen) => {
   return navigation.navigate(screen);
 };
+
+
+export const searchWord = (wordArray, searchKey) => {
+  let lowerSearchKey = searchKey.toLowerCase();
+  let newArr = wordArray.filter((word) =>
+    word.toLowercase().includes(lowerSearchKey)
+  );
+  return newArr;
+};
