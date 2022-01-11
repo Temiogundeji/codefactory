@@ -26,7 +26,7 @@ export const navigate = (navigation, screen) => {
   return navigation.navigate(screen);
 };
 
-
+//Implement the search feature
 export const searchWord = (wordArray, searchKey) => {
   let lowerSearchKey = searchKey.toLowerCase();
   let newArr = wordArray.filter((word) =>

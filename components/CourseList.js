@@ -5,7 +5,6 @@ import { getCourses } from "../actions/courses";
 import CourseCard from "../components/CourseCard";
 import { ActivityIndicator } from "react-native-paper";
 
-const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
 
 const CourseList = () => {
