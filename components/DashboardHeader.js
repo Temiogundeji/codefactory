@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from "react-native";
 import { Card, Input, Icon } from "@ui-kitten/components";
 import { Feather } from "@expo/vector-icons";
-import { searchWord } from "../shared/utils";
+// 
+import CourseSearch from "./CourseSearch";
 
 const DashboardHeader = () => {
   const [isFocus, setIsFocus] = useState(true);
@@ -30,18 +31,7 @@ const DashboardHeader = () => {
             </View>
           </View>
         </View>
-        <View style={Styles.cardForm}>
-          <Input
-            value={searchVal}
-            size={"large"}
-            placeholder="Search course"
-            onChangeText={(value) => {
-              setSearchVal(value);
-            }}
-            style={Styles.searchForm}
-            accessoryRight={renderIcon}
-          />
-        </View>
+        <CourseSearch />
       </View>
     </Card>
   );
