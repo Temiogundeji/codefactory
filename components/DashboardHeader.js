@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from "react-native";
-import { Card, Input, Icon } from "@ui-kitten/components";
+import { Card, Input } from "@ui-kitten/components";
 import { Feather } from "@expo/vector-icons";
-// 
+//
 import CourseSearch from "./CourseSearch";
 
 const DashboardHeader = () => {
   const [isFocus, setIsFocus] = useState(true);
   const [searchVal, setSearchVal] = useState("");
 
-  const styleFocus = () => {};
+
+
+
   const renderIcon = (props) => (
     <TouchableWithoutFeedback>
       {/* <Icon {...props} name={"search"} /> */}
@@ -31,7 +33,7 @@ const DashboardHeader = () => {
             </View>
           </View>
         </View>
-        <CourseSearch />
+        {/* <CourseSearch /> */}
       </View>
     </Card>
   );

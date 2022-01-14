@@ -1,28 +1,26 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import { Card, Input, Icon } from "@ui-kitten/components";
 import { Feather } from "@expo/vector-icons";
 import { searchCourse } from "../shared/utils";
 
-const CourseSearch = ({ courses }) => {
-  courses = courses || [];
-  const [searchVal, setSearchVal] = useState("");
-  const [filterCourses, setFilteredCourses] = useState([]);
+const renderIcon = (props) => (
+  <TouchableWithoutFeedback>
+    {/* <Icon {...props} name={"search"} /> */}
+    <Feather name="search" size={18} color="#3C3A36" />
+  </TouchableWithoutFeedback>
+);
 
-  const courseSearch = () => {
-    let lowerSearchVal = searchVal.toLowerCase();
-    let newCourseArray = courses.filter((course) =>
-      word.toLowerCase().includes(lowerSearchVal)
-    );
-    setFilteredCourses(newCourseArray);
-  };
+const CourseSearch = ({ handleChange = () => {}, value }) => {
+  
+
   return (
     <View style={Styles.cardForm}>
       <Input
         value={searchVal}
         size={"large"}
-        placeholder="Search course"
-        onChangeText={() => searchVal()}
+        placeholder="Search Course"
+        onChangeText={handleChange}
         style={Styles.searchForm}
         accessoryRight={renderIcon}
       />
