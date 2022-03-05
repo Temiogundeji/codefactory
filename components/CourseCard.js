@@ -3,15 +3,15 @@ import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 
 const windowWidth = Dimensions.get("window").width - 40;
 
-const CourseCard = ({ cardImage, title, description }) => (
-  <View style={Styles.container}>
+const CourseCard = (props) => (
+  <View style={Styles.container} key={props.id}>
     <View style={Styles.cardContainer}>
       <View style={Styles.cardHeader}>
-        <Image source={{ uri: cardImage }} style={Styles.image} />
+        <Image source={{ uri: props.image }} style={Styles.image} />
       </View>
       <View style={Styles.cardBody}>
-        <Text style={Styles.cardTitle}>{title}</Text>
-        <Text style={Styles.cardDescription}>{description}</Text>
+        <Text style={Styles.cardTitle}>{props.title}</Text>
+        <Text style={Styles.cardDescription}>{props.about}</Text>
       </View>
     </View>
   </View>
@@ -19,9 +19,11 @@ const CourseCard = ({ cardImage, title, description }) => (
 
 const Styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: "center",
+    height: 100,
     width: "100%",
+    marginBottom: "60%",
   },
   cardContainer: {
     backgroundColor: "#ffffff",

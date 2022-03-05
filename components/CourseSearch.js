@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
+import {
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  SafeAreaView,
+} from "react-native";
 import { Card, Input, Icon } from "@ui-kitten/components";
 import { Feather } from "@expo/vector-icons";
 import { searchCourse } from "../shared/utils";
@@ -11,20 +16,19 @@ const renderIcon = (props) => (
   </TouchableWithoutFeedback>
 );
 
-const CourseSearch = ({ handleChange = () => {}, value }) => {
-  
-
+const CourseSearch = ({ handleSearch, searchQuery }) => {
   return (
-    <View style={Styles.cardForm}>
+    <SafeAreaView style={Styles.cardForm}>
       <Input
-        value={searchVal}
+        value={searchQuery !== null && searchQuery ? searchQuery : null}
         size={"large"}
         placeholder="Search Course"
-        onChangeText={handleChange}
+        onChange={handleSearch}
+        defaultValue={searchQuery}
         style={Styles.searchForm}
         accessoryRight={renderIcon}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
