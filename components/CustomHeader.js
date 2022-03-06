@@ -4,10 +4,11 @@ import { Ionicons } from "@expo/vector-icons";
 
 const IconSize = 50;
 
-const CustomHeader = ({ name }) => {
+const CustomHeader = ({ name, handlePress = () => {} }) => {
   return (
     <View style={styles.container}>
       <Ionicons
+        onPress={handlePress}
         style={styles.iconStyle}
         name="chevron-back-circle-outline"
         size={IconSize}
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto-bold",
   },
   iconStyle: {
-    marginRight: "20%",
+    marginRight: "22%",
   },
   screenTitle: {
     textAlign: "center",

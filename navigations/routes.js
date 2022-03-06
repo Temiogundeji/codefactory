@@ -5,6 +5,7 @@ import IntroScreen from "../screens/IntroScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SignupScreen from "../screens/SignUpScreen";
 import BottomTab from "./BottomTab";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,11 @@ const Navigator = () => {
           options={{ headerShown: false }}
           name="SignUpScreen"
           component={SignupScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="ProfileScreen"
+          component={ProfileScreen}
         />
         <Stack.Screen
           options={{ headerShown: false }}
