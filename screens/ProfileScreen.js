@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, Image } from "react-native";
+import { View, StyleSheet, ScrollView, Image } from "react-native";
 import { Card } from "@ui-kitten/components";
 import CustomHeader from "../components/CustomHeader";
 import { useNavigation } from "@react-navigation/native";
@@ -19,12 +19,13 @@ const ProfileScreen = () => {
           source={require("../assets/Avatar.png")}
         />
       </View>
-      <View style={styles.profileMenuCards}>
+      <ScrollView>
         <ProfileMenuCard title="Your Courses" />
+        <ProfileMenuCard title="Personal Information" />
         <ProfileMenuCard title="Saved" />
         <ProfileMenuCard title="Payments" />
         <ProfileMenuCard title="Logout" />
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -47,11 +48,11 @@ const styles = StyleSheet.create({
   imageStyle: {
     resizeMode: "contain",
     alignSelf: "center",
+    width: "35%",
+    marginTop:-30 
   },
   profileMenuCards: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
+    height: 1000,
   },
   profileMenuCard: {
     display: "flex",
