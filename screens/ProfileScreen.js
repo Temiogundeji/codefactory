@@ -1,6 +1,5 @@
 import React from "react";
 import { View, StyleSheet, ScrollView, Image } from "react-native";
-import { Card } from "@ui-kitten/components";
 import CustomHeader from "../components/CustomHeader";
 import { useNavigation } from "@react-navigation/native";
 import ProfileMenuCard from "../components/ProfileMenuCard";

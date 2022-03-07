@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import CourseCard from "./CourseCard";
 
-const Item = (course) => <CourseCard {...course} />;
+const Item = (course) => <CourseCard  {...course} />;
 
 const CourseList = ({ courses }) => {
   const renderItem = ({ item }) => <Item {...item} />;
@@ -18,9 +18,11 @@ const CourseList = ({ courses }) => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
+        style={styles.container}
         data={courses}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.container}
       />
     </SafeAreaView>
   );
@@ -28,7 +30,8 @@ const CourseList = ({ courses }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
+    marginBottom: 200,
+    height: 1050,
   },
 });
 

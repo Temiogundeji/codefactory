@@ -1,19 +1,29 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
+import { Card } from "@ui-kitten/components";
 
 const windowWidth = Dimensions.get("window").width - 40;
 
 const CourseCard = (props) => (
   <View style={Styles.container} key={props.id}>
-    <View style={Styles.cardContainer}>
-      <View style={Styles.cardHeader}>
-        <Image source={{ uri: props.image }} style={Styles.image} />
+    <TouchableOpacity onPress={() => props.handlePress()}>
+      <View style={Styles.cardContainer}>
+        <View style={Styles.cardHeader}>
+          <Image source={{ uri: props.image }} style={Styles.image} />
+        </View>
+        <View style={Styles.cardBody}>
+          <Text style={Styles.cardTitle}>{props.title}</Text>
+          <Text style={Styles.cardDescription}>{props.about}</Text>
+        </View>
       </View>
-      <View style={Styles.cardBody}>
-        <Text style={Styles.cardTitle}>{props.title}</Text>
-        <Text style={Styles.cardDescription}>{props.about}</Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   </View>
 );
 
