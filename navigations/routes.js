@@ -6,6 +6,7 @@ import LoginScreen from "../screens/LoginScreen";
 import SignupScreen from "../screens/SignUpScreen";
 import BottomTab from "./BottomTab";
 import ProfileScreen from "../screens/ProfileScreen";
+import CourseDetailsScreen from "../screens/CourseDetailsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,11 @@ const Navigator = () => {
           options={{ headerShown: false }}
           name="DashboardScreen"
           component={BottomTab}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="CourseDetailsScreen"
+          component={CourseDetailsScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,19 +1,25 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
+import { useNavigation } from "@react-navigation/native";
 const IconSize = 50;
 
-const CustomHeader = ({ name, handlePress = () => {} }) => {
+const CustomHeader = ({ name }) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Ionicons
-        onPress={handlePress}
-        style={styles.iconStyle}
-        name="chevron-back-circle-outline"
-        size={IconSize}
-        color="black"
-      />
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}
+      >
+        <Ionicons
+          style={styles.iconStyle}
+          name="chevron-back-circle-outline"
+          size={IconSize}
+          color="black"
+        />
+      </TouchableOpacity>
       <Text style={styles.screenTitle}>{name}</Text>
     </View>
   );
@@ -25,6 +31,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     marginTop: 50,
+    marginBottom: 30,
     textAlign: "center",
     fontFamily: "Roboto-bold",
   },

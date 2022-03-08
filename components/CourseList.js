@@ -9,11 +9,21 @@ import {
   Image,
 } from "react-native";
 import CourseCard from "./CourseCard";
-
-const Item = (course) => <CourseCard  {...course} />;
+import { useNavigation } from "@react-navigation/native";
 
 const CourseList = ({ courses }) => {
-  const renderItem = ({ item }) => <Item {...item} />;
+  const navigation = useNavigation();
+  const Item = (course) => (
+    <CourseCard
+      handlePress={() => {
+        navigation.navigate("CourseDetailsScreen", {
+          data: course,
+        });
+      }}
+      {...course}
+    />
+  );
+  const renderItem = ({ item, index }) => <Item {...item} />;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,7 +40,8 @@ const CourseList = ({ courses }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 200,
+    marginBottom: 100,
+    marginTop: 0,
     height: 1050,
   },
 });

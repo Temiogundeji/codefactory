@@ -1,17 +1,12 @@
 import React from "react";
 import { View, StyleSheet, ScrollView, Image } from "react-native";
 import CustomHeader from "../components/CustomHeader";
-import { useNavigation } from "@react-navigation/native";
 import ProfileMenuCard from "../components/ProfileMenuCard";
 
 const ProfileScreen = () => {
-  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <CustomHeader
-        handlePress={() => navigation.navigate("DashboardScreen")}
-        name={"Profile"}
-      />
+      <CustomHeader name={"Profile"} />
       <View style={styles.mainContainer}>
         <Image
           style={styles.imageStyle}
