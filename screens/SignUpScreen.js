@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useForm, Controller } from "react-hook-form";
-import { Text, Input, Icon, Button } from "@ui-kitten/components";
+import { Text, Input, Icon } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
 import { navigate } from "../shared/utils";
 import { signup } from "../actions/users";

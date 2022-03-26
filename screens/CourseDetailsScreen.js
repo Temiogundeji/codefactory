@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import CustomHeader from "../components/CustomHeader";
-
+import { Video, AVPlaybackStatus } from "expo-av";
+import VideoPlayer from "expo-video-player";
 const CourseDetailsScreen = ({ route }) => {
   const {
-    data: { id, title, about, duration },
+    data: { id, title, about, duration, videos },
   } = route.params;
+
+  const video = useRef();
+  const [status, setStatus] = useState({});
+
   return (
     <View key={id} style={styles.container}>
       <CustomHeader name={"Course"} />
@@ -15,6 +20,17 @@ const CourseDetailsScreen = ({ route }) => {
         <View style={styles.durationRow}>
           <Text style={styles.durationLabel}>Duration: </Text>
           <Text style={styles.duration}>{duration}</Text>
+        </View>
+        <View>
+          <VideoPlayer
+            videoProps={{
+              shouldPlay: true,
+              resizeMode: Video.RESIZE_MODE_CONTAIN,
+              source: {
+                uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+              },
+            }}
+          />
         </View>
       </View>
     </View>

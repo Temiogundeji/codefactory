@@ -17,7 +17,7 @@ const DashboardScreen = () => {
   useEffect(() => {
     dispatch(getCourses());
   }, []);
-  console.log(courses);
+
   useEffect(() => {
     if (courses) {
       setMyCourses(courses);

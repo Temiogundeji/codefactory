@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useForm, Controller } from "react-hook-form";
-import { Text, Input, Icon, Button } from "@ui-kitten/components";
+import { Text, Input, Icon } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
 import { navigate } from "../shared/utils";
 import { login } from "../actions/users";
@@ -64,8 +64,6 @@ const LoginScreen = () => {
             resizeMode: "cover",
             height: "35%",
             width: "80%",
-            // height: 253,
-            // width: 343,
           }}
           source={require("../assets/login.png")}
         />
@@ -184,7 +182,6 @@ const Styles = StyleSheet.create({
     height: 144,
     width: "100%",
     alignItems: "center",
-    // marginBottom: 3,
   },
   introOneText: {
     color: "#3C3A36",
