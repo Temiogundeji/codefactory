@@ -1,16 +1,25 @@
-import React, { useRef, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState, useCallback } from "react";
+import { View, Text, StyleSheet, Button, Alert } from "react-native";
 import CustomHeader from "../components/CustomHeader";
-import { Video, AVPlaybackStatus } from "expo-av";
-import VideoPlayer from "expo-video-player";
+import YoutubePlayer from "react-native-youtube-iframe";
+
 const CourseDetailsScreen = ({ route }) => {
   const {
     data: { id, title, about, duration, videos },
   } = route.params;
 
-  const video = useRef();
-  const [status, setStatus] = useState({});
+  const [playing, setPlaying] = useState(false);
+  console.log(videos);
+  const onStateChange = useCallback((state) => {
+    if (state === "ended") {
+      setPlaying(false);
+      Alert.alert("video has finished playing!");
+    }
+  }, []);
 
+  const togglePlaying = useCallback(() => {
+    setPlaying((prev) => !prev);
+  }, []);
   return (
     <View key={id} style={styles.container}>
       <CustomHeader name={"Course"} />
@@ -22,15 +31,16 @@ const CourseDetailsScreen = ({ route }) => {
           <Text style={styles.duration}>{duration}</Text>
         </View>
         <View>
-          <VideoPlayer
-            videoProps={{
-              shouldPlay: true,
-              resizeMode: Video.RESIZE_MODE_CONTAIN,
-              source: {
-                uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-              },
+          <YoutubePlayer
+            height={180}
+            play={playing}
+            videoId={"OEOb48jG4Cc"}
+            onChangeState={onStateChange}
+            onError={(error) => {
+              Alert.alert("A problem occured", error);
             }}
           />
+          <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
         </View>
       </View>
     </View>
@@ -57,6 +67,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginTop: 10,
+    marginBottom: 15,
   },
   duration: {
     color: "#222222",
